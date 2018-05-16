@@ -5,14 +5,14 @@ class Search < ActiveRecord::Base
     raw_stations = JSON.parse(response.body)['fuel_stations']
     sorted = raw_stations.sort_by {|station| station['distance']}
     top_10 = sorted[0..9]
-    top_10.map do |raw_station|
-      Station.new({   id: raw_station['id'],
-                      name: raw_station['name'],
-                      address: raw_station['address'],
-                      fuel_type: raw_station['fuel_type'],
+    top_10.each do |raw_station|
+       Station.new({   id: raw_station['id'],
+                      name: raw_station['station_name'],
+                      address: raw_station['street_address'],
+                      fuel_type: raw_station['fuel_type_code'],
                       distance: raw_station['distance'],
                       access_days_time: raw_station['access_days_time']})
-                end
+        end
   end
 
 
