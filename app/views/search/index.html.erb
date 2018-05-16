@@ -1,5 +1,5 @@
 <h1>10 Closest stations within 6 miles:</h1>
-<%= @stations.each do |station| %>
+<% @stations.each do |station| %>
   <div class="station_<%=station.id%>">
     <h3><%= station.name%></h3>
     <ul>
