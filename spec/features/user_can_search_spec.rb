@@ -14,9 +14,10 @@ describe 'As a user when I visit /' do
       # **sorted by distance
       expect(page).to have_content('10 Closest stations within 6 miles:')
       stations = Search.last.stations
-      # stations.each do |station|
-      #   expect(page).to have_css("station_#{station.id}")
-      # end
+
+      stations.each do |station|
+        expect(page).to have_css(".station_#{station.id}")
+      end
       # And the stations should be limited to Electric and Propane
       # And for each of the stations I should see Name, Address, Fuel Types, Distance, and Access Times
       stations.each do |station|
