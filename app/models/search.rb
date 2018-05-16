@@ -5,8 +5,8 @@ class Search < ActiveRecord::Base
     raw_stations = JSON.parse(response.body)['fuel_stations']
     sorted = raw_stations.sort_by {|station| station['distance']}
     top_10 = sorted[0..9]
-    top_10.each do |raw_station|
-       Station.new({   id: raw_station['id'],
+    top_10.map do |raw_station|
+       Station.new({  id: raw_station['id'],
                       name: raw_station['station_name'],
                       address: raw_station['street_address'],
                       fuel_type: raw_station['fuel_type_code'],
@@ -25,11 +25,11 @@ end
 class Station
   attr_reader :id, :name, :address, :fuel_type, :distance, :access_days_time
   def initialize(data)
-    @id = data['id']
-    @name = data['name']
-    @address = data['address']
-    @fuel_type = data['fuel_type']
-    @distance = data['distance']
-    @access_days_time = data['access_days_time']
+    @id = data[:id]
+    @name = data[:name]
+    @address = data[:address]
+    @fuel_type = data[:fuel_type]
+    @distance = data[:distance]
+    @access_days_time = data[:access_days_time]
   end
 end
