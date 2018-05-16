@@ -4,7 +4,7 @@ describe 'As a user when I visit /' do
   context 'And I fill in the search form' do
     it 'I see 10 closest stations and their attributes' do
       visit '/'
-      fill_in 'q', with: '80203'
+      fill_in 'zip_code', with: '80203'
       click_on 'Locate'
 
       expect(current_path).to eq '/search'
